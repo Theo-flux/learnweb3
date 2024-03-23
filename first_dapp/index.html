@@ -23,70 +23,94 @@
             margin: 10px 0px 5px 0px;
         }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/ethers@6.11.1/lib.commonjs/index.min.js" async></script>
 </head>
 <body>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const moodContractAddress = '0xd9145CCE52D386f254917e481eB44e9943F39138'
-            const moodContractABI = [
-                {
-                    "inputs": [],
-                    "name": "getMood",
-                    "outputs": [
-                        {
-                            "internalType": "string",
-                            "name": "",
-                            "type": "string"
-                        }
-                    ],
-                    "stateMutability": "view",
-                    "type": "function"
-                },
-                {
-                    "inputs": [
-                        {
-                            "internalType": "string",
-                            "name": "_mood",
-                            "type": "string"
-                        }
-                    ],
-                    "name": "setMood",
-                    "outputs": [],
-                    "stateMutability": "nonpayable",
-                    "type": "function"
-                }
-            ]
-            let MoodContract;
-            let signer;
+    <script type="module">
+        import { ethers } from "https://cdn.ethers.io/lib/ethers-5.7.2.esm.min.js";
+        
+        const moodContractAddress = '0xd8b934580fcE35a11B58C6D73aDeE468a2833fa8'
+        const moodContractABI = [
+            {
+                "inputs": [
+                    {
+                        "internalType": "string",
+                        "name": "_mood",
+                        "type": "string"
+                    }
+                ],
+                "name": "setMood",
+                "outputs": [],
+                "stateMutability": "nonpayable",
+                "type": "function"
+            },
+            {
+                "inputs": [],
+                "name": "getMood",
+                "outputs": [
+                    {
+                        "internalType": "string",
+                        "name": "",
+                        "type": "string"
+                    }
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            }
+        ]
+        let MoodContract;
+        let signer;
 
-            async function connectProviderAndContract() {
-                // web3 provider- connection to ethereum network (sepolia testnet in my case)
+        async function connectProviderAndContract() {
+            try {
+                console.log("Connecting to provider and contract...");
                 const provider = new ethers.providers.Web3Provider(window.ethereum, "sepolia");
                 await provider.send("eth_requestAccounts", []);
                 const accounts = await provider.listAccounts();
+                console.log("Accounts:", accounts);
                 signer = provider.getSigner(accounts[0]);
+                console.log("Signer:", signer);
                 MoodContract = new ethers.Contract(
                     moodContractAddress,
                     moodContractABI,
                     signer
                 );
+                console.log("Contract:", MoodContract);
+            } catch (error) {
+                console.error("Error connecting to provider and contract:", error);
+                throw error; // Rethrow the error to propagate it further
             }
+        }
 
-            // Request access to the user's wallet and assign values to MoodContract and signer
-            async function getMood() {
+        async function getMyMood() {
+            try {
+                console.log("Getting mood...");
                 await connectProviderAndContract();
                 const mood = await MoodContract.getMood();
+                console.log("Retrieved mood:", mood);
                 document.getElementById("showMood").innerText = `Your Mood: ${mood}`;
-                console.log(mood);
+            } catch (error) {
+                console.error("Error getting mood:", error);
+                alert("Error getting mood. See console for details.");
             }
+        }
 
-            async function setMood() {
+        async function setMood() {
+            try {
+                console.log("Setting mood...");
                 await connectProviderAndContract();
                 const mood = document.getElementById("mood").value;
+                console.log("New mood:", mood);
                 await MoodContract.setMood(mood);
+                console.log("Mood set.");
+            } catch (error) {
+                console.error("Error setting mood:", error);
+                alert("Error setting mood. See console for details.");
             }
-        })
+        }
+        document.getElementById("getMoodButton").addEventListener("click", getMyMood);
+        document.getElementById("setMoodButton").addEventListener("click", setMood);
+
+        
     </script>
     <div>
         <h1>This is my dApp!</h1>
@@ -94,8 +118,8 @@
         <label for="mood">Input Mood:</label><br/>
         <input type="text" id="mood"/>
 
-        <button onclick="getMood()">Get Mood</button>
-        <button onclick="setMood()">Set Mood</button>
+        <button id="getMoodButton">Get Mood</button>
+        <button id="setMoodButton">Set Mood</button>
         <p id="showMood"></p>
     </div>
 </body>
