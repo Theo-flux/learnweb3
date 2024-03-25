@@ -7,3 +7,6 @@
 [submodule "sophormore/whitelist_dapp/foundry-app/lib/forge-std"]
 	path = sophormore/whitelist_dapp/foundry-app/lib/forge-std
 	url = https://github.com/foundry-rs/forge-std
+[submodule "sophormore/whitelis_dapp/lib/forge-std"]
+	path = sophormore/whitelis_dapp/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
