@@ -13,3 +13,6 @@
 [submodule "sophormore/whitelist_dapp/lib/openzepplin-contracts"]
 	path = sophormore/whitelist_dapp/lib/openzepplin-contracts
 	url = https://github.com/OpenZepplin/openzepplin-contracts
+[submodule "sophormore/whitelist_dapp/lib/openzeppelin-contracts"]
+	path = sophormore/whitelist_dapp/lib/openzeppelin-contracts
+	url = https://github.com/OpenZeppelin/openzeppelin-contracts

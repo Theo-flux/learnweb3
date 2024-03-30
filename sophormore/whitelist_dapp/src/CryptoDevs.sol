@@ -6,16 +6,16 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "./Whitelist.sol";
 
 contract CryptoDevs is ERC721Enumerable, Ownable {
-    // _price is the price of one CryptoDev
-    uint8  constant public _price = 0.01 ether;
+    //  _price is the price of one Crypto Dev NFT
+    uint256 constant public _price = 0.01 ether;
 
-    // maximum number of CryptoDevs that can ever exist
-    uint8 constant public maxTokenIds = 20;
+    // Max number of CryptoDevs that can ever exist
+    uint256 constant public maxTokenIds = 20;
 
-    // whitelist contract instance
+    // Whitelist contract instance
     Whitelist whitelist;
 
-    // number of tokens reserved for whitelisted members
+    // Number of tokens reserved for whitelisted members
     uint256 public reservedTokens;
     uint256 public reservedTokensClaimed = 0;
 
@@ -27,24 +27,24 @@ contract CryptoDevs is ERC721Enumerable, Ownable {
       */
     constructor (address whitelistContract) ERC721("Crypto Devs", "CD") Ownable(msg.sender) {
         whitelist = Whitelist(whitelistContract);
-        reservedTokens = whitelist.maxWhitelistedAddress;
+        reservedTokens = whitelist.maxWhitelistedAddress();
     }
 
     function mint() public payable {
-      // Make sure we always leave enough room for whitelist reservations
-      require(totalSupply() + reservedTokens - reservedTokensClaimed < maxTokenIds, "EXCEEDED_MAX_SUPPLY");
+        // Make sure we always leave enough room for whitelist reservations
+        require(totalSupply() + reservedTokens - reservedTokensClaimed < maxTokenIds, "EXCEEDED_MAX_SUPPLY");
 
-      // If user is part of the whitelist, make sure there is still reserved tokens left
-      if(whitelist.whitelistedAddresses(msg.sender) && msg.value < _price) {
-        //Make sure user does not already own nft
-        require(balanceOf(msg.sender), "ALREADY_OWNED");
-        reservedTokensClaimed += 1;
-      }else {
-        // If user is not on the whitelistaddress
-        require(msg.value > _price, "NOT_ENOUGH_ETHER");
-      }
-      uint256 tokenId = totalSupply();
-      _safeMint(msg.sender, tokenId);
+        // If user is part of the whitelist, make sure there is still reserved tokens left
+        if (whitelist.whitelistedAddresses(msg.sender) && msg.value < _price) {
+            // Make sure user doesn't already own an NFT
+            require(balanceOf(msg.sender) == 0, "ALREADY_OWNED");
+            reservedTokensClaimed += 1;
+        } else {
+            // If user is not part of the whitelist, make sure they have sent enough ETH
+            require(msg.value >= _price, "NOT_ENOUGH_ETHER");
+        }
+        uint256 tokenId = totalSupply();
+        _safeMint(msg.sender, tokenId);
     }
 
     /**

@@ -3,4 +3,4 @@ echo "loading environment variables..."
 source .env
 echo "forging your foundry app..."
 # forge create --rpc-url $RPC_URL --private-key $PRIVATE_KEY --constructor-args 10 --etherscan-api-key $ETHERSCAN_API_KEY --verify src/Whitelist.sol:Whitelist
-forge create --rpc-url $RPC_URL --private-key $PRIVATE_KEY --constructor-args 0x09f13597C57719CE078eCF3b3b5dff6586Ac96Db --etherscan-api-key $ETHERSCAN_API_KEY --verify src/CryptoDevs.sol:CryptoDevs
+forge create --rpc-url $RPC_URL --private-key $PRIVATE_KEY --constructor-args 0x2701BdBA4045ef5F3243Fe300531155eB5f94712 --etherscan-api-key $ETHERSCAN_API_KEY --verify src/CryptoDevs.sol:CryptoDevs
