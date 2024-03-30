@@ -21,7 +21,7 @@ async function main() {
   );
 
   // Deploy the DAO Contract
-  const amount = hre.ethers.parseEther("1"); // You can change this value from 1 ETH to something else
+  const amount = hre.ethers.parseEther("0.04"); // You can change this value from 1 ETH to something else
   const daoContract = await hre.ethers.deployContract(
     "CryptoDevsDAO",
     [fakeNftMarketplaceContract.target, nftContract.target],
