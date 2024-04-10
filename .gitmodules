@@ -25,3 +25,6 @@
 [submodule "my_trials/student_registry/lib/forge-std"]
 	path = my_trials/student_registry/lib/forge-std
 	url = https://github.com/foundry-rs/forge-std
+[submodule "my_trials/student_registry/lib/openzeppelin-contracts"]
+	path = my_trials/student_registry/lib/openzeppelin-contracts
+	url = https://github.com/OpenZeppelin/openzeppelin-contracts
