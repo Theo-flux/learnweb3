@@ -22,3 +22,6 @@
 [submodule "sophormore/dex_app/lib/openzeppelin-contracts"]
 	path = sophormore/dex_app/lib/openzeppelin-contracts
 	url = https://github.com/OpenZeppelin/openzeppelin-contracts
+[submodule "my_trials/student_registry/lib/forge-std"]
+	path = my_trials/student_registry/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
