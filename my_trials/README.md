@@ -1,0 +1,2 @@
+- A List of project ideas to better my understanding of web3.
+- I attempt to build this smart contracts with little or no tutotrials. 
