@@ -8,7 +8,7 @@ import { WagmiProvider } from "wagmi";
 const queryClient = new QueryClient();
 
 // 1. Get projectId at https://cloud.walletconnect.com
-const projectId = "e1c6143098260f37ab3e45d2b57b8f4c";
+const projectId = import.meta.env.VITE_REACT_WALLET_CONNECT_PROJECT_ID;
 
 const metadata = {
   name: "ens dApp",
@@ -20,7 +20,7 @@ const metadata = {
 };
 
 const config = defaultWagmiConfig({
-  appName: "ENS dapp",
+  appName: import.meta.env.VITE_REACT_APP_NAME,
   projectId,
   metadata,
   chains: [sepolia],
