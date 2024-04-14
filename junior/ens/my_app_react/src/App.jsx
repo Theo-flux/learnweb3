@@ -1,6 +1,9 @@
-import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useEffect, useState } from "react";
 import { useAccount, useEnsName } from "wagmi";
+
+function ConnectButton() {
+  return <w3m-button />
+}
 
 export default function App() {
   //state variables for the user's ENS name . It will be blank ("") if inexistent
