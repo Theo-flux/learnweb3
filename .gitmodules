@@ -28,3 +28,6 @@
 [submodule "my_trials/student_registry/lib/openzeppelin-contracts"]
 	path = my_trials/student_registry/lib/openzeppelin-contracts
 	url = https://github.com/OpenZeppelin/openzeppelin-contracts
+[submodule "junior/ipfs/nft_ipfs/lib/forge-std"]
+	path = junior/ipfs/nft_ipfs/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
